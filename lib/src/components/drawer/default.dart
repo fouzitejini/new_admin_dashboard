@@ -75,25 +75,27 @@ class _EasyDrawerState extends State<EasyDrawer> {
                       itemBuilder: (context, index) {
                         if (widget.tiles?[index] is SideBarTile) {
                           var tl = widget.tiles?[index] as SideBarTile;
-                          return DrawerTile(
-                            isSelected: selected == index,
-                            showTitle: showFull,
-                            tile: tl,
-                            onTap: () {
-                              setState(() => selected = index);
-                              widget.onTileTapped?.call(EasyBody(
-                                child: tl.body,
-                                title: tl.title,
-                              ));
-                            },
-                            selectedIconColor: widget.selectedIconColor,
-                            hoverColor: widget.hoverColor,
-                            iconColor: widget.iconColor,
-                            selectedTextColor: widget.selectedTextColor,
-                            selectedColor: widget.selectedColor,
-                            selectedTileColor: widget.selectedTileColor,
-                            textColor: widget.textColor,
-                            tileColor: widget.tileColor,
+                          return Center(
+                            child: DrawerTile(
+                              isSelected: selected == index,
+                              showTitle: showFull,
+                              tile: tl,
+                              onTap: () {
+                                setState(() => selected = index);
+                                widget.onTileTapped?.call(EasyBody(
+                                  child: tl.body,
+                                  title: tl.title,
+                                ));
+                              },
+                              selectedIconColor: widget.selectedIconColor,
+                              hoverColor: widget.hoverColor,
+                              iconColor: widget.iconColor,
+                              selectedTextColor: widget.selectedTextColor,
+                              selectedColor: widget.selectedColor,
+                              selectedTileColor: widget.selectedTileColor,
+                              textColor: widget.textColor,
+                              tileColor: widget.tileColor,
+                            ),
                           );
                         } else {
                           SideBarDivider divider =
