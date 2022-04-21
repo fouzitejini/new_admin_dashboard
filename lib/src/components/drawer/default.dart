@@ -49,86 +49,89 @@ class _EasyDrawerState extends State<EasyDrawer> {
   bool get showFull => (widget.size.width > 100);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        getTopWidget(
-              scrollBig: false,
-              scrollSmall: false,
-            ) ??
-            const SizedBox(),
-        SizedBox(
-          height: getTilesHeight,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                getTopWidget(
-                      scrollBig: true,
-                      scrollSmall: true,
-                    ) ??
-                    const SizedBox(),
-                if (widget.tiles != null)
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: widget.tiles?.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      if (widget.tiles?[index] is SideBarTile) {
-                        var tl = widget.tiles?[index] as SideBarTile;
-                        return DrawerTile(
-                          isSelected: selected == index,
-                          showTitle: showFull,
-                          tile: tl,
-                          onTap: () {
-                            setState(() => selected = index);
-                            widget.onTileTapped?.call(EasyBody(
-                              child: tl.body,
-                              title: tl.title,
-                            ));
-                          },
-                          selectedIconColor: widget.selectedIconColor,
-                          hoverColor: widget.hoverColor,
-                          iconColor: widget.iconColor,
-                          selectedTextColor: widget.selectedTextColor,
-                          selectedColor: widget.selectedColor,
-                          selectedTileColor: widget.selectedTileColor,
-                          textColor: widget.textColor,
-                          tileColor: widget.tileColor,
-                        );
-                      } else {
-                        SideBarDivider divider =
-                            widget.tiles?[index] as SideBarDivider;
-                        return Divider(
-                          height: divider.height,
-                          endIndent: divider.endIndent,
-                          indent: divider.indent,
-                          thickness: divider.thickness,
-                          color: divider.color,
-                        );
-                      }
-                    },
-                  ),
-                if ((widget.bottomWidget?.scrollable ?? false) == true)
-                  SizedBox(
-                    height: widget.bottomWidget?.height,
-                    child: widget.bottomWidget?.child,
-                  ),
-              ],
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Column(
+        children: [
+          getTopWidget(
+                scrollBig: false,
+                scrollSmall: false,
+              ) ??
+              const SizedBox(),
+          SizedBox(
+            height: getTilesHeight,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  getTopWidget(
+                        scrollBig: true,
+                        scrollSmall: true,
+                      ) ??
+                      const SizedBox(),
+                  if (widget.tiles != null)
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: widget.tiles?.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        if (widget.tiles?[index] is SideBarTile) {
+                          var tl = widget.tiles?[index] as SideBarTile;
+                          return DrawerTile(
+                            isSelected: selected == index,
+                            showTitle: showFull,
+                            tile: tl,
+                            onTap: () {
+                              setState(() => selected = index);
+                              widget.onTileTapped?.call(EasyBody(
+                                child: tl.body,
+                                title: tl.title,
+                              ));
+                            },
+                            selectedIconColor: widget.selectedIconColor,
+                            hoverColor: widget.hoverColor,
+                            iconColor: widget.iconColor,
+                            selectedTextColor: widget.selectedTextColor,
+                            selectedColor: widget.selectedColor,
+                            selectedTileColor: widget.selectedTileColor,
+                            textColor: widget.textColor,
+                            tileColor: widget.tileColor,
+                          );
+                        } else {
+                          SideBarDivider divider =
+                              widget.tiles?[index] as SideBarDivider;
+                          return Divider(
+                            height: divider.height,
+                            endIndent: divider.endIndent,
+                            indent: divider.indent,
+                            thickness: divider.thickness,
+                            color: divider.color,
+                          );
+                        }
+                      },
+                    ),
+                  if ((widget.bottomWidget?.scrollable ?? false) == true)
+                    SizedBox(
+                      height: widget.bottomWidget?.height,
+                      child: widget.bottomWidget?.child,
+                    ),
+                ],
+              ),
             ),
           ),
-        ),
-        const Spacer(),
-        if (((widget.bottomWidget?.scrollable ?? false) == false) && showFull)
-          SizedBox(
-            height: widget.bottomWidget?.height,
-            child: widget.bottomWidget?.child,
-          ),
-        if (((widget.bottomSmallWidget?.scrollable ?? false) == false) &&
-            !showFull)
-          SizedBox(
-            height: widget.bottomSmallWidget?.height,
-            child: widget.bottomSmallWidget?.child,
-          ),
-      ],
+          const Spacer(),
+          if (((widget.bottomWidget?.scrollable ?? false) == false) && showFull)
+            SizedBox(
+              height: widget.bottomWidget?.height,
+              child: widget.bottomWidget?.child,
+            ),
+          if (((widget.bottomSmallWidget?.scrollable ?? false) == false) &&
+              !showFull)
+            SizedBox(
+              height: widget.bottomSmallWidget?.height,
+              child: widget.bottomSmallWidget?.child,
+            ),
+        ],
+      ),
     );
   }
 
