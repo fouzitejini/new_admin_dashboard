@@ -159,7 +159,7 @@ final SideBarTile tile1 = SideBarTile(
   name: 'Home',
 );
 
-late final List<SideTile> tiles = [
+late final List<dynamic> tiles = [
   tile1,
   SideBarTile(
     title: const Text(

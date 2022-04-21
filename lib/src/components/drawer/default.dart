@@ -6,7 +6,7 @@ import 'package:easy_dashboard/src/utils/enums.dart';
 import 'package:flutter/material.dart';
 
 class EasyDrawer extends StatefulWidget {
-  final List<SideTile>? tiles;
+  final List<dynamic>? tiles;
   final ValueChanged<EasyBody>? onTileTapped;
   final SideBox? topWidget;
   final SideBox? topSmallWidget;
@@ -49,8 +49,7 @@ class _EasyDrawerState extends State<EasyDrawer> {
   bool get showFull => (widget.size.width > 100);
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
+    return Drawer(
       child: Column(
         children: [
           getTopWidget(
